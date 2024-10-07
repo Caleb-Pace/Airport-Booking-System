@@ -1,0 +1,591 @@
+[
+  {
+    "aeroplane": {
+      "seats": [
+        {
+          "seatType": "FIRST_CLASS",
+          "isTaken": true
+        },
+        {
+          "seatType": "FIRST_CLASS",
+          "isTaken": true
+        },
+        {
+          "seatType": "FIRST_CLASS",
+          "isTaken": true
+        },
+        {
+          "seatType": "FIRST_CLASS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        }
+      ],
+      "airline": {
+        "name": "Shadowline",
+        "banner": "Fly into the Darkness"
+      },
+      "model": "Boeing 747",
+      "callSign": "DEEPSLEEP"
+    },
+    "flightNumber": "SL9999",
+    "origin": "London",
+    "destination": "New York",
+    "departure": "04/09/2024 11:59 PM",
+    "delayed": true,
+    "estimatedArrival": "04/09/2024 06:00 AM",
+    "gateNumber": "C16"
+  },
+  {
+    "aeroplane": {
+      "seats": [
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        }
+      ],
+      "airline": {
+        "name": "Shadowline",
+        "banner": "Where the Sun Never Rises"
+      },
+      "model": "Boeing 737",
+      "callSign": "WITCHING-HOUR"
+    },
+    "flightNumber": "SH6662",
+    "origin": "Salem",
+    "destination": "New Orleans",
+    "departure": "02/09/2024 10:30 PM",
+    "delayed": false,
+    "estimatedArrival": "03/09/2024 03:00 AM",
+    "gateNumber": "B10"
+  },
+  {
+    "aeroplane": {
+      "seats": [
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        }
+      ],
+      "airline": {
+        "name": "Nocturne Airways",
+        "banner": "Embrace the Abyss"
+      },
+      "model": "Airbus A320",
+      "callSign": "VOIDWALKER"
+    },
+    "flightNumber": "NA7777",
+    "origin": "Moscow",
+    "destination": "Tokyo",
+    "departure": "03/09/2024 3:45 AM",
+    "delayed": true,
+    "estimatedArrival": "03/09/2024 5:00 PM",
+    "gateNumber": "D8"
+  },
+  {
+    "aeroplane": {
+      "seats": [
+        {
+          "seatType": "FIRST_CLASS",
+          "isTaken": true
+        },
+        {
+          "seatType": "FIRST_CLASS",
+          "isTaken": false
+        },
+        {
+          "seatType": "FIRST_CLASS",
+          "isTaken": true
+        },
+        {
+          "seatType": "FIRST_CLASS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        }
+      ],
+      "airline": {
+        "name": "Shadowline",
+        "banner": "Rise from the Ashes"
+      },
+      "model": "Boeing 777",
+      "callSign": "BURNINGSOUL"
+    },
+    "flightNumber": "SL1313",
+    "origin": "Los Angeles",
+    "destination": "Las Vegas",
+    "departure": "05/09/2024 4:20 PM",
+    "delayed": false,
+    "estimatedArrival": "05/09/2024 5:40 PM",
+    "gateNumber": "B14"
+  },
+  {
+    "aeroplane": {
+      "seats": [
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        }
+      ],
+      "airline": {
+        "name": "SkyHigh Airlines",
+        "banner": "Edge of the Night"
+      },
+      "model": "Airbus A321",
+      "callSign": "NIGHTHAUNT"
+    },
+    "flightNumber": "SH1314",
+    "origin": "Miami",
+    "destination": "Havana",
+    "departure": "07/09/2024 11:59 PM",
+    "delayed": true,
+    "estimatedArrival": "08/09/2024 01:20 AM",
+    "gateNumber": "D18"
+  },
+  {
+    "aeroplane": {
+      "seats": [
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        }
+      ],
+      "airline": {
+        "name": "Nocturne Airways",
+        "banner": "Your Dreams, Our Nightmare"
+      },
+      "model": "Embraer 190",
+      "callSign": "NIGHTCRAWLER"
+    },
+    "flightNumber": "NA6661",
+    "origin": "Transylvania",
+    "destination": "Berlin",
+    "departure": "01/09/2024 2:00 AM",
+    "delayed": false,
+    "estimatedArrival": "01/09/2024 4:00 AM",
+    "gateNumber": "B24"
+  },
+  {
+    "aeroplane": {
+      "seats": [
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": false
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        }
+      ],
+      "airline": {
+        "name": "Nocturne Airways",
+        "banner": "Whispers of the Night"
+      },
+      "model": "McDonnell Douglas DC-10",
+      "callSign": "NIGHTTERROR"
+    },
+    "flightNumber": "NA1314",
+    "origin": "Sydney",
+    "destination": "Melbourne",
+    "departure": "06/09/2024 1:13 AM",
+    "delayed": false,
+    "estimatedArrival": "06/09/2024 3:20 AM",
+    "gateNumber": "C15"
+  }
+]
