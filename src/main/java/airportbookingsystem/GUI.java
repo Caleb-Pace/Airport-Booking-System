@@ -4,6 +4,9 @@ import javax.swing.JFrame;
 
 public class GUI {
      public static void main(String[] args) {
+
+        FlightManager.load();
+
         JFrame frame = new JFrame("Airport Booking System");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         BookingPanel panel = new BookingPanel();
