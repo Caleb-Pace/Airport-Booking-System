@@ -9,8 +9,11 @@ import java.util.Scanner;
  * 
  * @author Caleb
  */
+
+
 public class AirportBookingSystem
 {   
+    /* 
     public static void main(String[] args) {
         // Load in bookings
         FlightManager.load(); // Has to run first! (to load bookings)
@@ -19,6 +22,7 @@ public class AirportBookingSystem
         // Start
         selectMode(false);
    }
+    */
     
     /**
      * Displays the main menu and handles user selection.
