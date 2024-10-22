@@ -67,4 +67,18 @@ public class BookingDBManager {
             System.err.println(ex.getMessage());
         }
     }
+
+    public static void add(int id, String name, String flightNumber, String seatNumber) {
+        try {
+            Statement statement = conn.createStatement(); // Create sql statement
+
+            String insertSQL = "";
+            statement.execute(insertSQL);
+
+            statement.close(); // Close sql statement
+        } catch (SQLException ex) {
+            System.err.println("An error occured while setting up the database!");
+            ex.printStackTrace();
+        }
+    }
 }
