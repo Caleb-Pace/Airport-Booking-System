@@ -26,7 +26,8 @@ public class AirportBookingSystem
             System.err.println("Oh no!");
         else
             System.out.println("It works!");
-    
+
+        BookingDBManager.close();
    }
     
     /**
