@@ -1,6 +1,7 @@
 package airportbookingsystem;
 
 import static airportbookingsystem.InputHandler.*;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -12,12 +13,20 @@ import java.util.Scanner;
 public class AirportBookingSystem
 {   
     public static void main(String[] args) {
-        // Load in bookings
-        FlightManager.load(); // Has to run first! (to load bookings)
-        BookingManager.load();
+        // // Load in bookings
+        // FlightManager.load(); // Has to run first! (to load bookings)
+        // BookingManager.load();
         
-        // Start
-        selectMode(false);
+        // // Start
+        // selectMode(false);
+
+        // TODO: Remove and put into test cases
+        Connection a = BookingDBManager.getConnection();
+        if (a == null)
+            System.err.println("Oh no!");
+        else
+            System.out.println("It works!");
+    
    }
     
     /**
