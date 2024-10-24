@@ -119,7 +119,7 @@
         },
         {
           "seatType": "ECONOMY",
-          "isTaken": false
+          "isTaken": true
         },
         {
           "seatType": "ECONOMY",

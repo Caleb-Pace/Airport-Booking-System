@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class AirportBookingSystem
 {   
-    /* 
+    /*
     public static void main(String[] args) {
         // Load in bookings
         FlightManager.load(); // Has to run first! (to load bookings)

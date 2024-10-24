@@ -3,6 +3,7 @@ package airportbookingsystem;
 import javax.swing.JFrame;
 
 public class GUI {
+    
      public static void main(String[] args) {
 
         FlightManager.load();

@@ -33,6 +33,10 @@ public class Flight {
         this.gateNumber = gateNumber;
     }
 
+    public Flight(String flightNumber2, String origin2, String destination2, String departure2) {
+        //TODO Auto-generated constructor stub
+    }
+
     public void display() {
         System.out.printf("| %-10s | %-20s | %-20s | %-20s |%n",
                 getFlightNumber(),
