@@ -27,6 +27,8 @@ public class AirportBookingSystem
         else
             System.out.println("It works!");
 
+        BookingDBManager.add(1000, "Bob", "123456", "B12");
+
         BookingDBManager.close();
    }
     

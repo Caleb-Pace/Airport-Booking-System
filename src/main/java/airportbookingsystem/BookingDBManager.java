@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 /**
  * @author Caleb
@@ -40,7 +41,7 @@ public class BookingDBManager {
             // Create booking table
             String createTableSQL = "CREATE TABLE bookings ("
                                     + "booking_id  INT NOT NULL PRIMARY KEY,"
-                                    + "Name VARCHAR(50),"
+                                    + "Name VARCHAR(20),"
                                     + "flight_number VARCHAR(10),"
                                     + "seat_number VARCHAR(4))";
             statement.execute(createTableSQL);
@@ -57,6 +58,7 @@ public class BookingDBManager {
         }
     }
 
+    // TODO: Comment
     public static void close() {
         if (conn == null)
             return;
@@ -68,14 +70,18 @@ public class BookingDBManager {
         }
     }
 
+    // TODO: Comment
     public static void add(int id, String name, String flightNumber, String seatNumber) {
         try {
-            Statement statement = conn.createStatement(); // Create sql statement
-
-            String insertSQL = "";
-            statement.execute(insertSQL);
-
-            statement.close(); // Close sql statement
+            String insertSQL = "INSERT INTO bookings VALUES (?, ?, ?, ?)";
+            try (PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+                pstmt.setInt(1, id);
+                pstmt.setString(2, name);
+                pstmt.setString(3, flightNumber);
+                pstmt.setString(4, seatNumber);
+    
+                pstmt.executeUpdate();
+            }
         } catch (SQLException ex) {
             System.err.println("An error occured while setting up the database!");
             ex.printStackTrace();
