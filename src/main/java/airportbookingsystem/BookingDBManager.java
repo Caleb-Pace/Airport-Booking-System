@@ -205,10 +205,12 @@ public class BookingDBManager {
         return null;
     }
 
+    // TODO: Comment
     public static ArrayList<Booking> getAllBookings() {
         ArrayList<Booking> bookings = new ArrayList<>();
         ArrayList<Integer> ids = getAllIDs();
 
+        // Retrieve bookings by ids
         for (int id : ids) {
             Booking b = getByID(id);
             if (b == null)
@@ -220,6 +222,7 @@ public class BookingDBManager {
         return bookings;
     }
 
+    // TODO: Comment
     public static ArrayList<Integer> getAllIDs() {
         ArrayList<Integer> ids = new ArrayList<>();
 
