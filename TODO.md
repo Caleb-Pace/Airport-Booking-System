@@ -42,6 +42,7 @@
 - [x] Fix
   - [x] Flight not found error
   - [x] Duplicate data error
+  - [x] getByID method not cleaning up if found
 - [ ] \[Model\] DerbyDB
   - [x] DB: Embedded DB "hello world"
   - [x] DB: Setup

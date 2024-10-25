@@ -154,6 +154,8 @@ public class BookingDBManager {
 
     // TODO: Comment
     public static Booking getByID(int id) {
+        Booking booking = null;
+
         // Validate ID
         if (!isIDValid(id))
             return null; // Invalid ID
@@ -176,7 +178,7 @@ public class BookingDBManager {
                 String flightNumber = rs.getString("FLIGHT_NUMBER");
                 String seatNumber = rs.getString("SEAT_NUMBER");
 
-                return new Booking(id, name, flightNumber, seatNumber);
+                booking =  new Booking(id, name, flightNumber, seatNumber);
             }
 
             // Clean up
@@ -186,7 +188,7 @@ public class BookingDBManager {
             System.err.println("SQLException: " + ex.getMessage());
         }
 
-        return null;
+        return booking;
     }
 
     // TODO: Comment
