@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 /**
  * @author Caleb
@@ -144,6 +144,7 @@ public class BookingDBManager {
         if (!isIDValid(id))
             return null; // Invalid ID
 
+        // Execute query
         String sqlQuery = "SELECT p.passenger_name, b.flight_number, b.seat_number\n"
                         + "FROM bookings b, people p\n"
                         + "WHERE b.booking_id = p.booking_id\n"
@@ -172,6 +173,50 @@ public class BookingDBManager {
         }
 
         return null;
+    }
+
+    public static ArrayList<Booking> getAllBookings() {
+        ArrayList<Booking> bookings = new ArrayList<>();
+        ArrayList<Integer> ids = getAllIDs();
+
+        for (int id : ids) {
+            Booking b = getByID(id);
+            if (b == null)
+                continue;
+
+            bookings.add(b);
+        }
+
+        return bookings;
+    }
+
+    public static ArrayList<Integer> getAllIDs() {
+        ArrayList<Integer> ids = new ArrayList<>();
+
+        // Execute query
+        String sqlQuery = "SELECT p.booking_id\n"
+                        + "FROM bookings b, people p\n"
+                        + "WHERE b.booking_id = p.booking_id";
+        ResultSet rs = queryDB(sqlQuery);
+
+        // No results
+        if (rs == null)
+            return ids;
+
+        try {
+            // Retrieve bookings
+            while (rs.next()) {
+                ids.add(rs.getInt("BOOKING_ID"));
+            }
+
+            // Clean up
+            rs.close();
+            statement.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+
+        return ids;
     }
 
     // TODO: Comment

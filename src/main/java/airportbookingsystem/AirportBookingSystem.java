@@ -2,6 +2,7 @@ package airportbookingsystem;
 
 import static airportbookingsystem.InputHandler.*;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -29,12 +30,17 @@ public class AirportBookingSystem
 
         int id = 1001;
         boolean wasAdded = BookingDBManager.add(id, "Bob", "SL9999", "B12");
-
         if (wasAdded) {
             Booking test = BookingDBManager.getByID(id);
             test.display();
         } else {
             System.out.println("Booking was not added!");
+        }
+
+        ArrayList<Booking> bookings = BookingDBManager.getAllBookings();
+        System.out.printf("Got %d bookings:\n", bookings.size());
+        for (Booking b : bookings) {
+            b.display();
         }
 
         BookingDBManager.close();
