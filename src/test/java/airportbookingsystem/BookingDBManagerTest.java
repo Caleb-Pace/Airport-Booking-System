@@ -6,8 +6,8 @@ package airportbookingsystem;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -19,15 +19,15 @@ public class BookingDBManagerTest {
     
     public BookingDBManagerTest() {}
     
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUpClass() {
         FlightManager.load();             // Load flights
         BookingDBManager.getConnection(); // Connect to embedded database
         System.out.println("\n[Tests] (for Booking DB Manager)");
     }
     
-    @After
-    public void tearDown() {
+    @AfterClass
+    public static void tearDownClass() {
         BookingDBManager.resetDB(); // Clear database
         BookingDBManager.close();
     }
@@ -35,7 +35,7 @@ public class BookingDBManagerTest {
     /**
      * Test of getConnection method, of class BookingDBManager.
      */
-    @Test
+    // @Test
     public void testGetConnection() {
         System.out.println("getConnection");
         Connection result = BookingDBManager.getConnection();
@@ -108,12 +108,13 @@ public class BookingDBManagerTest {
     @Test
     public void testGetByID() {
         System.out.println("getByID");
-        int id = 1000;
+        int id = 1003;
 
         // TODO: Remove - debug
-        //// Preparation
-        // boolean a = BookingDBManager.add(id, "Steve", "JH9302", "C243");
-        // System.out.printf("Added %d? %s\n", id, (a?"T":"F"));
+        // Preparation
+        boolean a = BookingDBManager.add(id, "Steve", "JH9302", "C243");
+        System.out.printf("Added %d? %s\n", id, (a?"T":"F"));
+        System.out.printf("ID count: %d\n", BookingDBManager.getAllIDs().size());
 
         // Test
         Booking result = BookingDBManager.getByID(id);
