@@ -50,10 +50,12 @@ public class Booking
      * Displays booking information in a formatted table row.
      */
     public void display() {
+        String flightNumber = (flight != null ? flight.getFlightNumber() : "Unknown");
+
         System.out.printf("| %-4d | %-20s | %-10s | %-4s |%n",
                           getId(), 
-                          name, 
-                          flight.getFlightNumber(), 
+                          name,
+                          flightNumber, 
                           seatNumber);
     }
     

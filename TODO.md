@@ -39,8 +39,8 @@
     - [ ] Return/Back {Button}
 
 # Caleb
-- [ ] Fix
-  - [ ] Flight not found error
+- [x] Fix
+  - [x] Flight not found error
   - [x] Duplicate data error
 - [ ] \[Model\] DerbyDB
   - [x] DB: Embedded DB "hello world"

@@ -28,8 +28,8 @@ public class AirportBookingSystem
         else
             System.out.println("It works!");
 
-        int id = 1001;
-        boolean wasAdded = BookingDBManager.add(id, "Bob", "SL9999", "B12");
+        int id = 1002;
+        boolean wasAdded = BookingDBManager.add(id, "Steve", "123456", "B12");
         if (wasAdded) {
             Booking test = BookingDBManager.getByID(id);
             test.display();
