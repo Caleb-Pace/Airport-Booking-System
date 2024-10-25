@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 
 public class BookingPanel extends JPanel {
     private DefaultTableModel tableModel;
@@ -24,7 +25,7 @@ public class BookingPanel extends JPanel {
 
         // Create title label
         JLabel titleLabel = new JLabel("AIRPORT BOOKING SYSTEM", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Set font size and style
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         add(titleLabel, BorderLayout.NORTH);
 
         // Create panel for buttons
@@ -39,7 +40,7 @@ public class BookingPanel extends JPanel {
         buttonPanel.add(makeBookingButton);
         buttonPanel.add(viewBookingButton);
 
-        // Add button panel to the center of the main panel
+        
         add(buttonPanel, BorderLayout.CENTER);
 
         // Action listener for making a booking
@@ -49,11 +50,18 @@ public class BookingPanel extends JPanel {
                 showAvailableFlights();
             }
         });
+        viewBookingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewBooking(); // Call the viewBooking method when clicked
+            }
+        });
     }
+
+    
 
     // Method to display the available flights in a table
     private void showAvailableFlights() {
-        // Create a new window to display available flights
         JFrame flightsFrame = new JFrame("Available Flights");
         flightsFrame.setSize(600, 400);
         flightsFrame.setLayout(new BorderLayout());
@@ -231,6 +239,8 @@ public class BookingPanel extends JPanel {
         HashMap<String, Seat> seatMap = FlightManager.getSeatMap(flight);
         String[] seatNumbers = seatMap.keySet().toArray(new String[0]);
     
+        Arrays.sort(seatNumbers);
+
         // Create a dropdown for available seats
         JComboBox<String> seatDropdown = new JComboBox<>(seatNumbers);
         selectionPanel.add(new JLabel("Select Seat:"));
@@ -280,4 +290,116 @@ public class BookingPanel extends JPanel {
         // Display the booking window
         bookingFrame.setVisible(true);
     }
+    private void viewBooking() {
+        BookingManager.load();
+    
+        // Create a new frame to display booking information
+        JFrame bookingFrame = new JFrame("View Bookings");
+        bookingFrame.setSize(600, 400);
+        bookingFrame.setLayout(new BorderLayout());
+    
+        // Define column names for the table
+        String[] columnNames = {"Booking ID", "Passenger Name", "Flight Number", "Seat Number"};
+    
+        
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+    
+        // Retrieve all booking IDs
+        int[] ids = BookingManager.getBookingIDs();
+        for (int id : ids) {
+            Booking booking = BookingManager.getBooking(id); // Retrieve booking by ID
+            if (booking != null) {
+                // Add a row for each booking
+                tableModel.addRow(new Object[]{
+                        booking.getId(),
+                        booking.getName(),
+                        booking.getFlight().getFlightNumber(), 
+                        booking.getSeatNumber() 
+                });
+            }
+        }
+    
+        // Create a JTable with the table model
+        JTable bookingTable = new JTable(tableModel);
+        bookingTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane scrollPane = new JScrollPane(bookingTable);
+        bookingFrame.add(scrollPane, BorderLayout.CENTER);
+    
+        // Add a mouse listener to handle row selection
+        bookingTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selectedRow = bookingTable.getSelectedRow();
+                if (selectedRow != -1) {
+                    int bookingId = (int) tableModel.getValueAt(selectedRow, 0); // Get Booking ID
+                    Booking booking = BookingManager.getBooking(bookingId); // Retrieve the selected booking
+                    showBookingDetails(booking, bookingTable, tableModel); // Call method to display details
+                }
+            }
+        });
+    
+        // Create a "Close" button
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(e -> bookingFrame.dispose());
+        bookingFrame.add(closeButton, BorderLayout.SOUTH);
+    
+        // Display the booking window
+        bookingFrame.setVisible(true);
+    }
+    
+
+    private void showBookingDetails(Booking booking, JTable bookingTable, DefaultTableModel tableModel) {
+        // Create a new frame to display booking details
+        JFrame detailsFrame = new JFrame("Booking Details");
+        detailsFrame.setSize(300, 400);
+        detailsFrame.setLayout(new BorderLayout());
+    
+        // Create a text area to display ticket details
+        JTextArea detailsTextArea = new JTextArea();
+        detailsTextArea.setEditable(false);
+        detailsTextArea.setText(
+                "***************************************\n" +
+                "*           BOARDING PASS             *\n" +
+                "***************************************\n" +
+                String.format("* %-35s *\n", "ID: " + booking.getId()) +
+                String.format("* %-35s *\n", "Passenger Name: " + booking.getName()) +
+                String.format("* %-35s *\n", "Flight Number: " + booking.getFlight().getFlightNumber()) +
+                "*-------------------------------------*\n" +
+                String.format("* %-35s *\n", "Seat Number: " + booking.getSeatNumber()) +
+                "***************************************"
+        );
+    
+        JScrollPane scrollPane = new JScrollPane(detailsTextArea);
+        detailsFrame.add(scrollPane, BorderLayout.CENTER);
+    
+        // Create a panel for buttons
+        JPanel buttonPanel = new JPanel();  // Declare the buttonPanel here
+    
+        // Create a Cancel Booking button
+        JButton cancelButton = new JButton("Cancel Booking");
+        cancelButton.addActionListener(e -> {
+            // Cancel the booking
+            BookingManager.cancel(booking.getId());
+            tableModel.removeRow(bookingTable.getSelectedRow()); // Remove from the table
+            detailsFrame.dispose();
+    
+            JOptionPane.showMessageDialog(null, booking.getId() + " has been cancelled.", "Booking Cancelled", JOptionPane.INFORMATION_MESSAGE);
+        });
+        buttonPanel.add(cancelButton);  // Add the cancel button to the panel
+    
+        // Create a Close button
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(e -> detailsFrame.dispose()); // Close the window
+        buttonPanel.add(closeButton);  // Add the close button to the panel
+    
+        detailsFrame.add(buttonPanel, BorderLayout.SOUTH); // Add the button panel to the frame
+    
+        // Display the details window
+        detailsFrame.setVisible(true);
+    }
+    
 }
+
+
+
+

@@ -127,4 +127,14 @@ public class Booking
     {
         return id;
     }
+
+    public String getName(){
+        return name;
+    }
+    public Flight getFlight(){
+        return flight;
+    }
+    public String getSeatNumber(){
+        return seatNumber;
+    }
 }
