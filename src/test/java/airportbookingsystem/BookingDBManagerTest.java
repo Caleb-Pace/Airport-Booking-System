@@ -109,22 +109,9 @@ public class BookingDBManagerTest {
     public void testGetByID() {
         System.out.println("getByID");
         int id = 1003;
+        BookingDBManager.add(id, "Steve", "JH9302", "C243");
 
-        // TODO: Remove - debug
-        // Preparation
-        boolean a = BookingDBManager.add(id, "Steve", "JH9302", "C243");
-        System.out.printf("Added %d? %s\n", id, (a?"T":"F"));
-        System.out.printf("ID count: %d\n", BookingDBManager.getAllIDs().size());
-
-        // Test
         Booking result = BookingDBManager.getByID(id);
-
-        // TODO: Remove - debug
-        if (result != null)
-            System.out.printf("%d", result.getId());
-        else
-            System.out.println("null result");
-
         assertNotNull(result);
     }
 

@@ -43,14 +43,6 @@ public class BookingDBManager {
 
     // TODO: Comment
     public static boolean add(int id, String passengerName , String flightNumber, String seatNumber) {
-        // TODO: Remove - Trace
-        System.out.printf(" CALL: Add(%d, ...) - Safety checks: %s %s %s | %s %s\n", id,
-                          ((passengerName.length() > 20)?"T":"F"),
-                          ((flightNumber.length() > 10)?"T":"F"),
-                          ((seatNumber.length() > 4)?"T":"F"),
-                          ((!isIDValid(id))?"T":"F"),
-                          ((dbContains(id))?"T":"F"));
-        
         //-/ Safety checks/Early exits
         // Validate string lengths
         if (passengerName.length() > 20)
@@ -95,7 +87,6 @@ public class BookingDBManager {
             ex.printStackTrace();
         }
 
-        System.out.printf("TRACE: Add(%d, ...) - Exception!\n", id); // TODO: Remove - Trace
         return false; // Not added
     }
 
@@ -163,13 +154,9 @@ public class BookingDBManager {
 
     // TODO: Comment
     public static Booking getByID(int id) {
-        System.out.printf(" CALL: getByID(%d);\n", id); // TODO: Remove - Trace
-
         // Validate ID
         if (!isIDValid(id))
             return null; // Invalid ID
-
-        System.out.printf("TRACE: getByID(%d) - SQL Query;\n", id); // TODO: Remove - Trace
 
         // Execute query
         String sqlQuery = "SELECT p.passenger_name, b.flight_number, b.seat_number\n"
@@ -177,10 +164,6 @@ public class BookingDBManager {
                         + "WHERE b.booking_id = p.booking_id\n"
                         + "AND b.booking_id = " + id;
         ResultSet rs = queryDB(sqlQuery);
-        
-        System.out.printf("TRACE: getByID(%d) - ID exists? %s;\n", id, (dbContains(id)?"T":"F")); // TODO: Remove - Trace
-
-        System.out.printf("TRACE: getByID(%d) - Results null? %s;\n", id, (rs==null?"T":"F")); // TODO: Remove - Trace
 
         // No results
         if (rs == null)
@@ -189,16 +172,12 @@ public class BookingDBManager {
         try {
             // Retrieve booking
             if (rs.next()) {
-                System.out.printf("TRACE: getByID(%d) - Got results!;\n", id); // TODO: Remove - Trace
-
                 String name = rs.getString("PASSENGER_NAME");
                 String flightNumber = rs.getString("FLIGHT_NUMBER");
                 String seatNumber = rs.getString("SEAT_NUMBER");
 
                 return new Booking(id, name, flightNumber, seatNumber);
             }
-            
-            System.out.printf("TRACE: getByID(%d) - Clean up;\n", id); // TODO: Remove - Trace
 
             // Clean up
             rs.close();
@@ -207,7 +186,6 @@ public class BookingDBManager {
             System.err.println("SQLException: " + ex.getMessage());
         }
 
-        System.out.printf("TRACE: getByID(%d) - Exception!\n", id); // TODO: Remove - Trace
         return null;
     }
 
