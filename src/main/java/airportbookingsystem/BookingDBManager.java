@@ -154,9 +154,13 @@ public class BookingDBManager {
 
     // TODO: Comment
     public static Booking getByID(int id) {
+        System.out.printf(" CALL: getByID(%d);\n", id); // TODO: Remove - Trace
+
         // Validate ID
         if (!isIDValid(id))
             return null; // Invalid ID
+
+        System.out.printf("TRACE: getByID(%d) - SQL Query;\n", id); // TODO: Remove - Trace
 
         // Execute query
         String sqlQuery = "SELECT p.passenger_name, b.flight_number, b.seat_number\n"
@@ -165,6 +169,8 @@ public class BookingDBManager {
                         + "AND b.booking_id = " + id;
         ResultSet rs = queryDB(sqlQuery);
         
+        System.out.printf("TRACE: getByID(%d) - Results null? %s;\n", id, (rs==null?"T":"F")); // TODO: Remove - Trace
+
         // No results
         if (rs == null)
             return null;
@@ -172,6 +178,8 @@ public class BookingDBManager {
         try {
             // Retrieve booking
             if (rs.next()) {
+                System.out.printf("TRACE: getByID(%d) - Got results!;\n", id); // TODO: Remove - Trace
+
                 String name = rs.getString("PASSENGER_NAME");
                 String flightNumber = rs.getString("FLIGHT_NUMBER");
                 String seatNumber = rs.getString("SEAT_NUMBER");
@@ -179,6 +187,8 @@ public class BookingDBManager {
                 return new Booking(id, name, flightNumber, seatNumber);
             }
             
+            System.out.printf("TRACE: getByID(%d) - Clean up;\n", id); // TODO: Remove - Trace
+
             // Clean up
             rs.close();
             statement.close();
