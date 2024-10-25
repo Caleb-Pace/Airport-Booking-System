@@ -30,54 +30,6 @@ public class BookingDBManager {
     }
 
     // TODO: Comment
-    public static void setup() {
-        try {
-            // Load the embedded Derby driver
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-
-            // Establish a connection to the database
-            conn = DriverManager.getConnection(databaseURL, user, password);
-
-            //-/ Create tables
-            statement = conn.createStatement(); // Create sql statement
-            
-            // Create booking table
-            try {
-                String createTableSQL = "CREATE TABLE bookings ("
-                                      + "booking_id  INT NOT NULL PRIMARY KEY,"
-                                      + "flight_number VARCHAR(10),"
-                                      + "seat_number VARCHAR(4))";
-                statement.execute(createTableSQL);
-
-                System.out.println("Table 'bookings' created successfully!");
-            } catch (SQLException ex) {
-                // Rethrow exception if it’s not a "table already exists" error.
-                if (!ex.getMessage().contains("already exists in Schema"))
-                    throw ex;
-            }
-
-            // Create people table
-            try {
-                String createTableSQL = "CREATE TABLE people ("
-                                      + "booking_id  INT NOT NULL PRIMARY KEY,"
-                                      + "passenger_name VARCHAR(20))";
-                statement.execute(createTableSQL);
-                
-                System.out.println("Table 'people' created successfully!");
-            } catch (SQLException ex) {
-                // Rethrow exception if it’s not a "table already exists" error.
-                if (!ex.getMessage().contains("already exists in Schema"))
-                    throw ex;
-            }
-            
-            statement.close(); // Close sql statement
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.err.println("An error occured while setting up the database!");
-            ex.printStackTrace();
-        }
-    }
-
-    // TODO: Comment
     public static void close() {
         if (conn == null)
             return;
@@ -148,24 +100,56 @@ public class BookingDBManager {
         if (!dbContains(id))
             return; // ID not found
 
+        try {
+            statement = conn.createStatement(); // Create sql statement
+
+            // Remove from booking
+            String deleteSQL = "DELETE FROM bookings\n"
+                                + "WHERE booking_id = " + id;
+            statement.executeUpdate(deleteSQL);
+
+            // Remove from person
+            deleteSQL = "DELETE FROM people\n"
+                        + "WHERE booking_id = " + id;
+            statement.executeUpdate(deleteSQL);
+
+            statement.close(); // Close sql statement
+        } catch (SQLException ex) {
+            System.err.println("An error occured while setting up the database!");
+            ex.printStackTrace();
+        }
+    }
+
+    // TODO: Comment
+    public static void resetDB() {
+        try {
+            statement = conn.createStatement(); // Create sql statement
+
+            // Delete booking table
             try {
-                statement = conn.createStatement(); // Create sql statement
-
-                // Remove from booking
-                String deleteSQL = "DELETE FROM bookings\n"
-                                 + "WHERE booking_id = " + id;
-                statement.executeUpdate(deleteSQL);
-    
-                // Remove from person
-                deleteSQL = "DELETE FROM bookings\n"
-                          + "WHERE booking_id = " + id;
-                statement.executeUpdate(deleteSQL);
-
-                statement.close(); // Close sql statement
+                String deleteTableSQL = "DROP TABLE bookings";
+                statement.executeUpdate(deleteTableSQL);
             } catch (SQLException ex) {
-                System.err.println("An error occured while setting up the database!");
-                ex.printStackTrace();
+                // Rethrow exception if it’s not a "table does not exist" error.
+                if (!ex.getMessage().contains("does not exist"))
+                    throw ex;
             }
+
+            // Delete people table
+            try {
+                String deleteTableSQL = "DROP TABLE people";
+                statement.executeUpdate(deleteTableSQL);
+            } catch (SQLException ex) {
+                // Rethrow exception if it’s not a "table does not exist" error.
+                if (!ex.getMessage().contains("does not exist"))
+                    throw ex;
+            }
+
+            statement.close(); // Close sql statement
+        } catch (SQLException ex) {
+            System.err.println("An error occured while setting up the database!");
+            ex.printStackTrace();
+        }
     }
 
     // TODO: Comment
@@ -279,6 +263,54 @@ public class BookingDBManager {
         }
 
         return isPresent;
+    }
+
+    // TODO: Comment
+    private static void setup() {
+        try {
+            // Load the embedded Derby driver
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+
+            // Establish a connection to the database
+            conn = DriverManager.getConnection(databaseURL, user, password);
+
+            //-/ Create tables
+            statement = conn.createStatement(); // Create sql statement
+            
+            // Create booking table
+            try {
+                String createTableSQL = "CREATE TABLE bookings ("
+                                      + "booking_id  INT NOT NULL PRIMARY KEY,"
+                                      + "flight_number VARCHAR(10),"
+                                      + "seat_number VARCHAR(4))";
+                statement.execute(createTableSQL);
+
+                System.out.println("Table 'bookings' created successfully!");
+            } catch (SQLException ex) {
+                // Rethrow exception if it’s not a "table already exists" error.
+                if (!ex.getMessage().contains("already exists in Schema"))
+                    throw ex;
+            }
+
+            // Create people table
+            try {
+                String createTableSQL = "CREATE TABLE people ("
+                                      + "booking_id  INT NOT NULL PRIMARY KEY,"
+                                      + "passenger_name VARCHAR(20))";
+                statement.execute(createTableSQL);
+                
+                System.out.println("Table 'people' created successfully!");
+            } catch (SQLException ex) {
+                // Rethrow exception if it’s not a "table already exists" error.
+                if (!ex.getMessage().contains("already exists in Schema"))
+                    throw ex;
+            }
+            
+            statement.close(); // Close sql statement
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.err.println("An error occured while setting up the database!");
+            ex.printStackTrace();
+        }
     }
 
     // TODO: Comment

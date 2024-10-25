@@ -51,6 +51,7 @@ public class AirportBookingSystem
             b.display();
         }
 
+        BookingDBManager.resetDB();
         BookingDBManager.close();
    }
     
