@@ -41,14 +41,14 @@
 # Caleb
 - [ ] Fix
   - [ ] Flight not found error
-  - [ ] Duplicate data error
+  - [x] Duplicate data error
 - [ ] \[Model\] DerbyDB
   - [x] DB: Embedded DB "hello world"
   - [x] DB: Setup
   - [x] DB: Separate customer and booking
-  - [ ] DB: Add booking
+  - [x] DB: Add booking
     - [x] Validate data before adding to DB
-    - [ ] ID exists method
+    - [x] ID exists method
   - [ ] DB: Remove booking
   - [x] DB: Get booking (Search/Query bookings)
   - [ ] DB: List all bookings

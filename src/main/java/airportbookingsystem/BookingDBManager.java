@@ -90,7 +90,6 @@ public class BookingDBManager {
     }
 
     // TODO: Comment
-    // TODO: Validate data
     public static boolean add(int id, String passengerName , String flightNumber, String seatNumber) {
         //-/ Safety checks/Early exits
         // Validate string lengths
@@ -106,7 +105,8 @@ public class BookingDBManager {
             return false; // Invalid ID
 
         // Check if ID already exists
-        // TODO: Implement
+        if (dbContains(id))
+            return false; // Reject duplicate ID
 
         //-/ Add to database
         try {
@@ -145,9 +145,9 @@ public class BookingDBManager {
             return null; // Invalid ID
 
         String sqlQuery = "SELECT p.passenger_name, b.flight_number, b.seat_number\n"
-                 + "FROM bookings b, people p\n"
-                 + "WHERE b.booking_id = p.booking_id\n"
-                 + "AND b.booking_id = " + id;
+                        + "FROM bookings b, people p\n"
+                        + "WHERE b.booking_id = p.booking_id\n"
+                        + "AND b.booking_id = " + id;
         ResultSet rs = queryDB(sqlQuery);
         
         // No results
@@ -172,6 +172,33 @@ public class BookingDBManager {
         }
 
         return null;
+    }
+
+    // TODO: Comment
+    private static boolean dbContains(int id) {
+        boolean isPresent = false;
+
+        // Execute query
+        String sqlQuery = "SELECT b.booking_id\n"
+                        + "FROM bookings b, people p\n"
+                        + "WHERE b.booking_id = p.booking_id\n"
+                        + "AND b.booking_id = " + id;
+        ResultSet rs = queryDB(sqlQuery);
+
+        // No results
+        if (rs == null)
+            return isPresent; // (false)
+
+        try {
+            // Does query have data
+            isPresent = rs.next();
+            
+            rs.close(); // Clean up
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+
+        return isPresent;
     }
 
     // TODO: Comment
