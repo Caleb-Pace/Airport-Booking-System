@@ -119,7 +119,7 @@
         },
         {
           "seatType": "ECONOMY",
-          "isTaken": false
+          "isTaken": true
         },
         {
           "seatType": "ECONOMY",
@@ -170,7 +170,7 @@
       "seats": [
         {
           "seatType": "BUSINESS",
-          "isTaken": false
+          "isTaken": true
         },
         {
           "seatType": "BUSINESS",
@@ -178,19 +178,19 @@
         },
         {
           "seatType": "BUSINESS",
-          "isTaken": false
+          "isTaken": true
         },
         {
           "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
           "isTaken": true
         },
         {
           "seatType": "ECONOMY",
           "isTaken": true
-        },
-        {
-          "seatType": "ECONOMY",
-          "isTaken": false
         },
         {
           "seatType": "ECONOMY",
@@ -451,27 +451,11 @@
       "seats": [
         {
           "seatType": "ECONOMY",
-          "isTaken": false
-        },
-        {
-          "seatType": "ECONOMY",
-          "isTaken": false
-        },
-        {
-          "seatType": "ECONOMY",
           "isTaken": true
         },
         {
           "seatType": "ECONOMY",
           "isTaken": false
-        },
-        {
-          "seatType": "ECONOMY",
-          "isTaken": false
-        },
-        {
-          "seatType": "ECONOMY",
-          "isTaken": true
         },
         {
           "seatType": "ECONOMY",
@@ -487,7 +471,23 @@
         },
         {
           "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
           "isTaken": false
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
+        },
+        {
+          "seatType": "ECONOMY",
+          "isTaken": true
         }
       ],
       "airline": {
@@ -510,6 +510,14 @@
       "seats": [
         {
           "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
+          "isTaken": true
+        },
+        {
+          "seatType": "BUSINESS",
           "isTaken": false
         },
         {
@@ -517,11 +525,11 @@
           "isTaken": true
         },
         {
-          "seatType": "BUSINESS",
-          "isTaken": false
+          "seatType": "ECONOMY",
+          "isTaken": true
         },
         {
-          "seatType": "BUSINESS",
+          "seatType": "ECONOMY",
           "isTaken": true
         },
         {
@@ -538,15 +546,7 @@
         },
         {
           "seatType": "ECONOMY",
-          "isTaken": false
-        },
-        {
-          "seatType": "ECONOMY",
           "isTaken": true
-        },
-        {
-          "seatType": "ECONOMY",
-          "isTaken": false
         },
         {
           "seatType": "ECONOMY",

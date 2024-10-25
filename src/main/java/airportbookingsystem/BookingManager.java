@@ -11,7 +11,7 @@ public class BookingManager
 {
     private static HashSet<Booking> bookings = new HashSet<>(); // Stores all bookings
     
-    private static final String FILEPATH = "./resources/bookings.csv"; // File path for saving/loading bookings
+    static final String FILEPATH = "./resources/bookings.csv"; // File path for saving/loading bookings
     
     /**
      * Creates a new booking and adds it to the system.
