@@ -41,8 +41,8 @@
 # Caleb
 - [ ] \[Model\] DerbyDB
   - [x] DB: Embedded DB "hello world"
-  - [ ] DB: Setup
-  - [ ] DB: Separate customer and booking
+  - [x] DB: Setup
+  - [x] DB: Separate customer and booking
   - [ ] DB: Add booking
     - [ ] Validate data before adding to DB
   - [ ] DB: Remove booking

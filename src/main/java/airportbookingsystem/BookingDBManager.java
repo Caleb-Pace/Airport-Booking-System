@@ -35,24 +35,40 @@ public class BookingDBManager {
             // Establish a connection to the database
             conn = DriverManager.getConnection(databaseURL, user, password);
 
-
+            //-/ Create tables
             Statement statement = conn.createStatement(); // Create sql statement
             
             // Create booking table
-            String createTableSQL = "CREATE TABLE bookings ("
-                                    + "booking_id  INT NOT NULL PRIMARY KEY,"
-                                    + "Name VARCHAR(20),"
-                                    + "flight_number VARCHAR(10),"
-                                    + "seat_number VARCHAR(4))";
-            statement.execute(createTableSQL);
-            System.out.println("Table 'bookings' created successfully!");
+            try {
+                String createTableSQL = "CREATE TABLE bookings ("
+                                      + "booking_id  INT NOT NULL PRIMARY KEY,"
+                                      + "flight_number VARCHAR(10),"
+                                      + "seat_number VARCHAR(4))";
+                statement.execute(createTableSQL);
+
+                System.out.println("Table 'bookings' created successfully!");
+            } catch (SQLException ex) {
+                // Rethrow exception if it’s not a "table already exists" error.
+                if (!ex.getMessage().contains("already exists in Schema"))
+                    throw ex;
+            }
+
+            // Create people table
+            try {
+                String createTableSQL = "CREATE TABLE people ("
+                                      + "booking_id  INT NOT NULL PRIMARY KEY,"
+                                      + "Name VARCHAR(20))";
+                statement.execute(createTableSQL);
+                
+                System.out.println("Table 'people' created successfully!");
+            } catch (SQLException ex) {
+                // Rethrow exception if it’s not a "table already exists" error.
+                if (!ex.getMessage().contains("already exists in Schema"))
+                    throw ex;
+            }
             
             statement.close(); // Close sql statement
         } catch (ClassNotFoundException | SQLException ex) {
-            if (ex.getClass().getName().equals("java.sql.SQLException")
-             && ex.getMessage().contains("already exists in Schema"))
-                return; // Table already created
-
             System.err.println("An error occured while setting up the database!");
             ex.printStackTrace();
         }
@@ -71,14 +87,14 @@ public class BookingDBManager {
     }
 
     // TODO: Comment
+    // TODO: Validate data
     public static void add(int id, String name, String flightNumber, String seatNumber) {
         try {
-            String insertSQL = "INSERT INTO bookings VALUES (?, ?, ?, ?)";
+            String insertSQL = "INSERT INTO bookings VALUES (?, ?, ?)";
             try (PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
                 pstmt.setInt(1, id);
-                pstmt.setString(2, name);
-                pstmt.setString(3, flightNumber);
-                pstmt.setString(4, seatNumber);
+                pstmt.setString(2, flightNumber);
+                pstmt.setString(3, seatNumber);
     
                 pstmt.executeUpdate();
             }
@@ -86,5 +102,9 @@ public class BookingDBManager {
             System.err.println("An error occured while setting up the database!");
             ex.printStackTrace();
         }
+
+        // TODO: Implement people table add
+        //pstmt.setInt(1, id);
+        //pstmt.setString(2, name);
     }
 }
