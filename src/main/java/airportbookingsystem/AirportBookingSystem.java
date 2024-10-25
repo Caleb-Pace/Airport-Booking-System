@@ -43,6 +43,14 @@ public class AirportBookingSystem
             b.display();
         }
 
+        BookingDBManager.removeByID(id);
+
+        bookings = BookingDBManager.getAllBookings();
+        System.out.printf("Got %d bookings:\n", bookings.size());
+        for (Booking b : bookings) {
+            b.display();
+        }
+
         BookingDBManager.close();
    }
     

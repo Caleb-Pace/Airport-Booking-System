@@ -49,7 +49,7 @@
   - [x] DB: Add booking
     - [x] Validate data before adding to DB
     - [x] ID exists method
-  - [ ] DB: Remove booking
+  - [x] DB: Remove booking
   - [x] DB: Get booking (Search/Query bookings)
   - [x] DB: List all bookings
   - [ ] DB: Tests

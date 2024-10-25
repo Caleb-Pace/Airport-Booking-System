@@ -139,6 +139,36 @@ public class BookingDBManager {
     }
 
     // TODO: Comment
+    public static void removeByID(int id) {
+        // Validate ID
+        if (!isIDValid(id))
+            return; // Invalid ID
+        
+        // Check if ID exists
+        if (!dbContains(id))
+            return; // ID not found
+
+            try {
+                statement = conn.createStatement(); // Create sql statement
+
+                // Remove from booking
+                String deleteSQL = "DELETE FROM bookings\n"
+                                 + "WHERE booking_id = " + id;
+                statement.executeUpdate(deleteSQL);
+    
+                // Remove from person
+                deleteSQL = "DELETE FROM bookings\n"
+                          + "WHERE booking_id = " + id;
+                statement.executeUpdate(deleteSQL);
+
+                statement.close(); // Close sql statement
+            } catch (SQLException ex) {
+                System.err.println("An error occured while setting up the database!");
+                ex.printStackTrace();
+            }
+    }
+
+    // TODO: Comment
     public static Booking getByID(int id) {
         // Validate ID
         if (!isIDValid(id))
@@ -238,7 +268,9 @@ public class BookingDBManager {
             // Does query have data
             isPresent = rs.next();
             
-            rs.close(); // Clean up
+            // Clean up
+            rs.close();
+            statement.close();
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         }
