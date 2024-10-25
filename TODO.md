@@ -44,7 +44,8 @@
   - [x] DB: Setup
   - [x] DB: Separate customer and booking
   - [ ] DB: Add booking
-    - [ ] Validate data before adding to DB
+    - [x] Validate data before adding to DB
+    - [ ] ID exists method
   - [ ] DB: Remove booking
   - [ ] DB: Get booking (Search/Query bookings)
   - [ ] DB: List all bookings

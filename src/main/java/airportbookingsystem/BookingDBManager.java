@@ -88,8 +88,27 @@ public class BookingDBManager {
 
     // TODO: Comment
     // TODO: Validate data
-    public static void add(int id, String name, String flightNumber, String seatNumber) {
+    public static boolean add(int id, String name, String flightNumber, String seatNumber) {
+        //-/ Safety checks/Early exits
+        // Validate string lengths
+        if (name.length() > 20)
+            return false; // Name too long
+        if (flightNumber.length() > 10)
+            return false; // Flight number too long
+        if (seatNumber.length() > 4)
+            return false; // Seat number too long
+        
+        // Validate ID length
+        int idDigits = String.valueOf(id).length();
+        if (idDigits > 4)
+            return false;
+        
+        // Check if ID already exists
+        // TODO: Implement
+
+        //-/ Add to database
         try {
+            // Add booking data
             String insertSQL = "INSERT INTO bookings VALUES (?, ?, ?)";
             try (PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
                 pstmt.setInt(1, id);
@@ -98,13 +117,22 @@ public class BookingDBManager {
     
                 pstmt.executeUpdate();
             }
+
+            // Add person
+            insertSQL = "INSERT INTO people VALUES (?, ?)";
+            try (PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+                pstmt.setInt(1, id);
+                pstmt.setString(2, name);
+    
+                pstmt.executeUpdate();
+            }
+
+            return true; // Booking added
         } catch (SQLException ex) {
             System.err.println("An error occured while setting up the database!");
             ex.printStackTrace();
         }
 
-        // TODO: Implement people table add
-        //pstmt.setInt(1, id);
-        //pstmt.setString(2, name);
+        return false; // Not added
     }
 }
