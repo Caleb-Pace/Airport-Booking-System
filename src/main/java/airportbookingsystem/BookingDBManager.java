@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSet;
+
 import java.sql.PreparedStatement;
 
 /**
@@ -16,6 +18,7 @@ public class BookingDBManager {
     private static final String password = "GoO0dPawsword";
 
     private static Connection conn = null;
+    private static Statement statement = null;
 
     // TODO: Comment
     // TODO: Rethink - Does this need to be exposed?
@@ -36,7 +39,7 @@ public class BookingDBManager {
             conn = DriverManager.getConnection(databaseURL, user, password);
 
             //-/ Create tables
-            Statement statement = conn.createStatement(); // Create sql statement
+            statement = conn.createStatement(); // Create sql statement
             
             // Create booking table
             try {
@@ -57,7 +60,7 @@ public class BookingDBManager {
             try {
                 String createTableSQL = "CREATE TABLE people ("
                                       + "booking_id  INT NOT NULL PRIMARY KEY,"
-                                      + "Name VARCHAR(20))";
+                                      + "passenger_name VARCHAR(20))";
                 statement.execute(createTableSQL);
                 
                 System.out.println("Table 'people' created successfully!");
@@ -88,15 +91,15 @@ public class BookingDBManager {
 
     // TODO: Comment
     // TODO: Validate data
-    public static boolean add(int id, String name, String flightNumber, String seatNumber) {
+    public static boolean add(int id, String passengerName , String flightNumber, String seatNumber) {
         //-/ Safety checks/Early exits
         // Validate string lengths
-        if (name.length() > 20)
-            return false; // Name too long
+        if (passengerName .length() > 20)
+            return false; // Passenger's name is too long
         if (flightNumber.length() > 10)
-            return false; // Flight number too long
+            return false; // Flight number is too long
         if (seatNumber.length() > 4)
-            return false; // Seat number too long
+            return false; // Seat number is too long
         
         // Validate ID
         if (!isIDValid(id))
@@ -121,7 +124,7 @@ public class BookingDBManager {
             insertSQL = "INSERT INTO people VALUES (?, ?)";
             try (PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
                 pstmt.setInt(1, id);
-                pstmt.setString(2, name);
+                pstmt.setString(2, passengerName );
     
                 pstmt.executeUpdate();
             }
@@ -133,6 +136,57 @@ public class BookingDBManager {
         }
 
         return false; // Not added
+    }
+
+    // TODO: Comment
+    public static Booking getByID(int id) {
+        // Validate ID
+        if (!isIDValid(id))
+            return null; // Invalid ID
+
+        String sqlQuery = "SELECT p.passenger_name, b.flight_number, b.seat_number\n"
+                 + "FROM bookings b, people p\n"
+                 + "WHERE b.booking_id = p.booking_id\n"
+                 + "AND b.booking_id = " + id;
+        ResultSet rs = queryDB(sqlQuery);
+        
+        // No results
+        if (rs == null)
+            return null;
+
+        try {
+            // Retrieve booking
+            if (rs.next()) {
+                String name = rs.getString("PASSENGER_NAME");
+                String flightNumber = rs.getString("FLIGHT_NUMBER");
+                String seatNumber = rs.getString("SEAT_NUMBER");
+
+                return new Booking(id, name, flightNumber, seatNumber);
+            }
+            
+            // Clean up
+            rs.close();
+            statement.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+
+        return null;
+    }
+
+    // TODO: Comment
+    private static ResultSet queryDB(String sqlQuery) {
+        statement = null;
+        ResultSet rs = null;
+        
+        try {
+            statement = conn.createStatement(); // Create sql statement
+            rs = statement.executeQuery(sqlQuery);        // Execute query
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+        
+        return rs;
     }
 
     // TODO: Comment

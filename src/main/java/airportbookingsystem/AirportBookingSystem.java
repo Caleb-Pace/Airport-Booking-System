@@ -13,8 +13,8 @@ import java.util.Scanner;
 public class AirportBookingSystem
 {   
     public static void main(String[] args) {
-        // // Load in bookings
-        // FlightManager.load(); // Has to run first! (to load bookings)
+        // Load in bookings
+        FlightManager.load(); // Has to run first! (to load bookings)
         // BookingManager.load();
         
         // // Start
@@ -27,7 +27,10 @@ public class AirportBookingSystem
         else
             System.out.println("It works!");
 
-        BookingDBManager.add(1000, "Bob", "123456", "B12");
+        BookingDBManager.add(1000, "Bob", "SL9999", "B12");
+
+        Booking test = BookingDBManager.getByID(1000);
+        test.display();
 
         BookingDBManager.close();
    }

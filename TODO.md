@@ -39,6 +39,9 @@
     - [ ] Return/Back {Button}
 
 # Caleb
+- [ ] Fix
+  - [ ] Flight not found error
+  - [ ] Duplicate data error
 - [ ] \[Model\] DerbyDB
   - [x] DB: Embedded DB "hello world"
   - [x] DB: Setup
@@ -47,7 +50,7 @@
     - [x] Validate data before adding to DB
     - [ ] ID exists method
   - [ ] DB: Remove booking
-  - [ ] DB: Get booking (Search/Query bookings)
+  - [x] DB: Get booking (Search/Query bookings)
   - [ ] DB: List all bookings
   - [ ] DB: Tests
   - [ ] DB: 3+ reads
