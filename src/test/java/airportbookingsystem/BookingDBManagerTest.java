@@ -35,7 +35,7 @@ public class BookingDBManagerTest {
     /**
      * Test of getConnection method, of class BookingDBManager.
      */
-    // @Test
+    @Test
     public void testGetConnection() {
         System.out.println("getConnection");
         Connection result = BookingDBManager.getConnection();
@@ -91,7 +91,7 @@ public class BookingDBManagerTest {
     /**
      * Test of removeByID method, of class BookingDBManager.
      */
-    // @Test
+    @Test
     public void testRemoveByID() {
         System.out.println("removeByID");
         int id = 1001;
@@ -118,7 +118,7 @@ public class BookingDBManagerTest {
     /**
      * Test of getAllBookings method, of class BookingDBManager.
      */
-    // @Test
+    @Test
     public void testGetAllBookings() {
         System.out.println("getAllBookings");
         ArrayList<Booking> result = BookingDBManager.getAllBookings();
@@ -128,7 +128,7 @@ public class BookingDBManagerTest {
     /**
      * Test of getAllIDs method, of class BookingDBManager.
      */
-    // @Test
+    @Test
     public void testGetAllIDs() {
         System.out.println("getAllIDs");
         ArrayList<Integer> result = BookingDBManager.getAllIDs();

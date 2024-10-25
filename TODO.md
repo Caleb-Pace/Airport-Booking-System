@@ -54,6 +54,6 @@
   - [x] DB: Get booking (Search/Query bookings)
   - [x] DB: List all bookings
   - [x] DB: Reset/Clear
-  - [ ] DB: Tests
+  - [x] DB: Tests
   - [ ] DB: 3+ reads
   - [ ] DB: 3+ writes
