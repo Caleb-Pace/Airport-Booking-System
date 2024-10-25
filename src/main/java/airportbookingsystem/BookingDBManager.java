@@ -98,11 +98,10 @@ public class BookingDBManager {
         if (seatNumber.length() > 4)
             return false; // Seat number too long
         
-        // Validate ID length
-        int idDigits = String.valueOf(id).length();
-        if (idDigits > 4)
-            return false;
-        
+        // Validate ID
+        if (!isIDValid(id))
+            return false; // Invalid ID
+
         // Check if ID already exists
         // TODO: Implement
 
@@ -134,5 +133,11 @@ public class BookingDBManager {
         }
 
         return false; // Not added
+    }
+
+    // TODO: Comment
+    private static boolean isIDValid(int id) {
+        int idDigits = String.valueOf(id).length();
+        return (idDigits > 0 && idDigits <= 4);
     }
 }
