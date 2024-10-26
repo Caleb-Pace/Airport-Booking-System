@@ -23,6 +23,7 @@ public class BookingDBManagerTest {
     public static void setUpClass() {
         FlightManager.load();             // Load flights
         BookingDBManager.getConnection(); // Connect to embedded database
+
         System.out.println("\n[Tests] (for Booking DB Manager)");
     }
     
@@ -48,7 +49,7 @@ public class BookingDBManagerTest {
     @Test
     public void testAdd() {
         System.out.println("add");
-        int id = 1000;
+        int id = 9000;
         String passengerName = "Steve";
         String flightNumber = "AB1234";
         String seatNumber = "B19";
@@ -65,10 +66,10 @@ public class BookingDBManagerTest {
         assertEquals(expResult, result);
 
         System.out.println("add - id too long");
-        id = 10000;
+        id = 90000;
         result = BookingDBManager.add(id, passengerName, flightNumber, seatNumber);
         assertEquals(expResult, result);
-        id = 1001;
+        id = 9001;
         
         System.out.println("add - passengerName too long");
         passengerName = "Aequilibrium Generatrix Doloribus";
@@ -94,7 +95,7 @@ public class BookingDBManagerTest {
     @Test
     public void testRemoveByID() {
         System.out.println("removeByID");
-        int id = 1001;
+        int id = 9001;
         BookingDBManager.removeByID(id);
 
         Booking expResult = null;
@@ -108,7 +109,7 @@ public class BookingDBManagerTest {
     @Test
     public void testGetByID() {
         System.out.println("getByID");
-        int id = 1003;
+        int id = 9003;
         BookingDBManager.add(id, "Steve", "JH9302", "C243");
 
         Booking result = BookingDBManager.getByID(id);
