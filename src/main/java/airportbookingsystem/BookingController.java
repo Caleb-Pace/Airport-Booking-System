@@ -1,7 +1,17 @@
 package airportbookingsystem;
 
 public class BookingController {
+    private static final String controllerName = "Booking Controller";
     private static boolean _isInitialised = false;
+
+    // TODO: Comment
+    private static boolean isControllerReady() {
+        if (_isInitialised)
+            return true;
+
+        System.err.printf("%s: Not initialised!\n", controllerName);
+        return false;
+    }
 
     // TODO: Comment
     public static void init() {
@@ -9,7 +19,7 @@ public class BookingController {
         BookingDBManager.getConnection();
 
         _isInitialised = true;
-        System.out.println("Controller: Initialised!");
+        System.out.printf("%s: Initialised!\n", controllerName);
     }
 
     // TODO: Comment
@@ -17,7 +27,7 @@ public class BookingController {
         BookingDBManager.close(); // Close connection
 
         _isInitialised = false;
-        System.out.println("Controller: Cleanup completed!");
+        System.out.printf("%s: Cleanup completed!\n", controllerName);
     }
 
     // TODO: Comment
@@ -26,14 +36,5 @@ public class BookingController {
             return;
         
         BookingDBManager.add(id, passengerName, flightNumber, seatNumber);
-    }
-
-    // TODO: Comment
-    private static boolean isControllerReady() {
-        if (_isInitialised)
-            return true;
-
-        System.err.println("Controller: Not initialised!");
-        return false;
     }
 }
