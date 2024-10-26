@@ -1,6 +1,8 @@
 package airportbookingsystem;
 
 import static airportbookingsystem.InputHandler.*;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -17,10 +19,43 @@ public class AirportBookingSystem
     public static void main(String[] args) {
         // Load in bookings
         FlightManager.load(); // Has to run first! (to load bookings)
-        BookingManager.load();
+        // BookingManager.load();
         
-        // Start
-        selectMode(false);
+        // // Start
+        // selectMode(false);
+
+        // TODO: Remove and put into test cases
+        Connection a = BookingDBManager.getConnection();
+        if (a == null)
+            System.err.println("Oh no!");
+        else
+            System.out.println("It works!");
+
+        int id = 1002;
+        boolean wasAdded = BookingDBManager.add(id, "Steve", "123456", "B12");
+        if (wasAdded) {
+            Booking test = BookingDBManager.getByID(id);
+            test.display();
+        } else {
+            System.out.println("Booking was not added!");
+        }
+
+        ArrayList<Booking> bookings = BookingDBManager.getAllBookings();
+        System.out.printf("Got %d bookings:\n", bookings.size());
+        for (Booking b : bookings) {
+            b.display();
+        }
+
+        BookingDBManager.removeByID(id);
+
+        bookings = BookingDBManager.getAllBookings();
+        System.out.printf("Got %d bookings:\n", bookings.size());
+        for (Booking b : bookings) {
+            b.display();
+        }
+
+        BookingDBManager.resetDB();
+        BookingDBManager.close();
    }
     */
     
