@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BookingPanel extends JPanel {
@@ -272,8 +273,7 @@ public class BookingPanel extends JPanel {
                     } else {
                         // Proceed with booking
                         seat.isTaken = true; // Mark seat as taken
-                        Booking booking = BookingManager.create(passengerName, flight, selectedSeat);
-                        BookingManager.save(); // Save updated bookings
+                        BookingController.addBooking(passengerName, flight, selectedSeat);
     
                         JOptionPane.showMessageDialog(bookingFrame, "Booking successful for " + passengerName + " on seat " + selectedSeat + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
 
@@ -287,8 +287,6 @@ public class BookingPanel extends JPanel {
         bookingFrame.setVisible(true);
     }
     private void viewBooking() {
-        BookingManager.load();
-    
         // Create a new frame to display booking information
         JFrame bookingFrame = new JFrame("View Bookings");
         bookingFrame.setSize(600, 400);
@@ -301,9 +299,9 @@ public class BookingPanel extends JPanel {
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
     
         // Retrieve all booking IDs
-        int[] ids = BookingManager.getBookingIDs();
+        ArrayList<Integer> ids = BookingController.getBookingIDs();
         for (int id : ids) {
-            Booking booking = BookingManager.getBooking(id); // Retrieve booking by ID
+            Booking booking = BookingController.getBooking(id); // Retrieve booking by ID
             if (booking != null) {
                 // Add a row for each booking
                 tableModel.addRow(new Object[]{
@@ -328,7 +326,7 @@ public class BookingPanel extends JPanel {
                 int selectedRow = bookingTable.getSelectedRow();
                 if (selectedRow != -1) {
                     int bookingId = (int) tableModel.getValueAt(selectedRow, 0); // Get Booking ID
-                    Booking booking = BookingManager.getBooking(bookingId); // Retrieve the selected booking
+                    Booking booking = BookingController.getBooking(bookingId); // Retrieve the selected booking
                     showBookingDetails(booking, bookingTable, tableModel); // Call method to display details
                 }
             }
@@ -375,7 +373,7 @@ public class BookingPanel extends JPanel {
         JButton cancelButton = new JButton("Cancel Booking");
         cancelButton.addActionListener(e -> {
             // Cancel the booking
-            BookingManager.cancel(booking.getId());
+            BookingController.cancel(booking);
             tableModel.removeRow(bookingTable.getSelectedRow()); // Remove from the table
             detailsFrame.dispose();
     
