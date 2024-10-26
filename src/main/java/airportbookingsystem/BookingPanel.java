@@ -40,7 +40,6 @@ public class BookingPanel extends JPanel {
         buttonPanel.add(makeBookingButton);
         buttonPanel.add(viewBookingButton);
 
-        
         add(buttonPanel, BorderLayout.CENTER);
 
         // Action listener for making a booking
@@ -58,16 +57,14 @@ public class BookingPanel extends JPanel {
         });
     }
 
-    
-
     // Method to display the available flights in a table
     private void showAvailableFlights() {
         JFrame flightsFrame = new JFrame("Available Flights");
         flightsFrame.setSize(600, 400);
         flightsFrame.setLayout(new BorderLayout());
 
-        // Retrieve flights from FlightManager
-        HashSet<Flight> flights = FlightManager.getFlights();
+        // Retrieve flights from FlightDataController
+        HashSet<Flight> flights = FlightDataController.getFlights();
 
         // Create column names for the table
         String[] columnNames = { "Flight Number", "Origin", "Destination", "Departure" };
@@ -184,7 +181,7 @@ public class BookingPanel extends JPanel {
                 int selectedRow = flightsTable.getSelectedRow();
                 if (selectedRow >= 0) {
                     String selectedFlightNumber = (String) flightsTable.getValueAt(selectedRow, 0);
-                    Flight selectedFlight = FlightManager.getFlightByNumber(selectedFlightNumber);
+                    Flight selectedFlight = FlightDataController.getFlightByNumber(selectedFlightNumber);
                     displayFlightDetails(selectedFlight);
                 }
             }
@@ -236,7 +233,7 @@ public class BookingPanel extends JPanel {
         JPanel selectionPanel = new JPanel(new FlowLayout());
     
         // Get seat map from the flight
-        HashMap<String, Seat> seatMap = FlightManager.getSeatMap(flight);
+        HashMap<String, Seat> seatMap = FlightDataController.getSeatMap(flight);
         String[] seatNumbers = seatMap.keySet().toArray(new String[0]);
     
         Arrays.sort(seatNumbers);
@@ -277,7 +274,6 @@ public class BookingPanel extends JPanel {
                         seat.isTaken = true; // Mark seat as taken
                         Booking booking = BookingManager.create(passengerName, flight, selectedSeat);
                         BookingManager.save(); // Save updated bookings
-                        FlightManager.save(); // Save updated flight data
     
                         JOptionPane.showMessageDialog(bookingFrame, "Booking successful for " + passengerName + " on seat " + selectedSeat + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
 
@@ -399,7 +395,3 @@ public class BookingPanel extends JPanel {
     }
     
 }
-
-
-
-

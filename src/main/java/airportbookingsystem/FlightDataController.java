@@ -1,5 +1,8 @@
 package airportbookingsystem;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class FlightDataController {
     private static final String controllerName = "Flight data Controller";
     private static boolean _isInitialised = false;
@@ -19,5 +22,27 @@ public class FlightDataController {
 
         _isInitialised = true;
         System.out.printf("%s: Initialised!\n", controllerName);
+    }
+
+    // TODO: Comment
+    public static HashSet<Flight> getFlights() {
+        if (!isControllerReady())
+            return null;
+        
+        return FlightManager.getFlights();
+    }
+
+    public static Flight getFlightByNumber(String flightNumber) {
+        if (!isControllerReady())
+            return null;
+        
+        return FlightManager.getFlightByNumber(flightNumber);
+    }
+
+    public static HashMap<String, Seat> getSeatMap(Flight flight) {
+        if (!isControllerReady())
+            return null;
+        
+        return FlightManager.getSeatMap(flight);
     }
 }
