@@ -32,6 +32,7 @@ public class FlightDataController {
         return FlightManager.getFlights();
     }
 
+    // TODO: Comment
     public static Flight getFlightByNumber(String flightNumber) {
         if (!isControllerReady())
             return null;
@@ -39,6 +40,7 @@ public class FlightDataController {
         return FlightManager.getFlightByNumber(flightNumber);
     }
 
+    // TODO: Comment
     public static HashMap<String, Seat> getSeatMap(Flight flight) {
         if (!isControllerReady())
             return null;
