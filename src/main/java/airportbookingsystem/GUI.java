@@ -7,7 +7,9 @@ import java.awt.event.WindowEvent;
 public class GUI {
 
     public static void main(String[] args) {
-        BookingController.init(); // Initialise controller
+        // Initialise controllers
+        FlightDataController.init();
+        BookingController.init();
 
         // Create frame/GUI
         JFrame frame = new JFrame("Airport Booking System");
