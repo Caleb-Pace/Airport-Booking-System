@@ -11,7 +11,6 @@ import java.util.ArrayList;
 /**
  * @author Caleb
  */
-// TODO: Comment
 public class BookingDBManager {
     private static final String databaseURL = "jdbc:derby:db/BookingDB_Ebd;create=true";
     private static final String user = "BookingManager";
@@ -20,28 +19,41 @@ public class BookingDBManager {
     private static Connection conn = null;
     private static Statement statement = null;
 
-    // TODO: Comment
-    // TODO: Rethink - Does this need to be exposed?
+    /**
+     * Retrieves a database connection, initializing it if not already set up.
+     *
+     * @return Connection - the active database connection
+     */
     public static Connection getConnection() {
         if (conn == null)
-            setup();
+            setup(); // Set up the connection if it's not initialized
         
-        return conn;
+        return conn; // Return the established connection
     }
 
-    // TODO: Comment
+    /**
+     * Closes the database connection if it is active.
+     */
     public static void close() {
         if (conn == null)
-            return;
+            return; // No open connection
 
         try {
-            conn.close();
+            conn.close(); // Attempt to close the connection
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
 
-    // TODO: Comment
+    /**
+     * Adds a booking to the database.
+     *
+     * @param id            Unique booking ID
+     * @param passengerName Name of the passenger
+     * @param flightNumber  Flight number for the booking
+     * @param seatNumber    Seat number for the booking
+     * @return boolean      True if booking was successfully added, false if invalid or duplicate
+     */
     public static boolean add(int id, String passengerName , String flightNumber, String seatNumber) {
         //-/ Safety checks/Early exits
         // Validate string lengths
@@ -90,7 +102,11 @@ public class BookingDBManager {
         return false; // Not added
     }
 
-    // TODO: Comment
+    /**
+     * Removes a booking from both tables in the database by its ID.
+     *
+     * @param id Unique booking ID to remove
+     */
     public static void removeByID(int id) {
         // Validate ID
         if (!isIDValid(id))
@@ -120,7 +136,9 @@ public class BookingDBManager {
         }
     }
 
-    // TODO: Comment
+    /**
+     * Resets the database by deleting both tables.
+     */
     public static void resetDB() {
         try {
             statement = conn.createStatement(); // Create sql statement
@@ -152,7 +170,12 @@ public class BookingDBManager {
         }
     }
 
-    // TODO: Comment
+    /**
+     * Retrieves a booking by its ID.
+     *
+     * @param id Unique booking ID to search for
+     * @return Booking The booking object if found, or null if invalid or not found
+     */
     public static Booking getByID(int id) {
         Booking booking = null;
 
@@ -191,24 +214,32 @@ public class BookingDBManager {
         return booking;
     }
 
-    // TODO: Comment
+    /**
+     * Retrieves all bookings from the database.
+     *
+     * @return ArrayList<Booking> List of all booking objects
+     */
     public static ArrayList<Booking> getAllBookings() {
         ArrayList<Booking> bookings = new ArrayList<>();
-        ArrayList<Integer> ids = getAllIDs();
+        ArrayList<Integer> ids = getAllIDs(); // Fetch all booking IDs
 
-        // Retrieve bookings by ids
+        // Retrieve each booking by its ID and add to the list
         for (int id : ids) {
             Booking b = getByID(id);
             if (b == null)
-                continue;
+                continue; // Skip if no booking found for the ID
 
-            bookings.add(b);
+            bookings.add(b); // Add the valid booking to the list
         }
 
         return bookings;
     }
 
-    // TODO: Comment
+    /**
+     * Retrieves all booking IDs from the database.
+     *
+     * @return ArrayList<Integer> List of all booking IDs
+     */
     public static ArrayList<Integer> getAllIDs() {
         ArrayList<Integer> ids = new ArrayList<>();
 
@@ -238,7 +269,12 @@ public class BookingDBManager {
         return ids;
     }
 
-    // TODO: Comment
+    /**
+     * Checks if the database contains a booking with the specified ID.
+     *
+     * @param id Unique booking ID to check for
+     * @return boolean True if the ID exists in the database, otherwise false
+     */
     private static boolean dbContains(int id) {
         boolean isPresent = false;
 
@@ -267,7 +303,9 @@ public class BookingDBManager {
         return isPresent;
     }
 
-    // TODO: Comment
+    /**
+     * Establishes the connection to the embedded database.
+     */
     private static void setup() {
         try {
             // Load the embedded Derby driver
@@ -315,14 +353,19 @@ public class BookingDBManager {
         }
     }
 
-    // TODO: Comment
+    /**
+     * Executes a SQL query on the database and returns the result set.
+     *
+     * @param sqlQuery The SQL query string to execute
+     * @return ResultSet The result set obtained from executing the query
+     */
     private static ResultSet queryDB(String sqlQuery) {
         statement = null;
         ResultSet rs = null;
         
         try {
-            statement = conn.createStatement(); // Create sql statement
-            rs = statement.executeQuery(sqlQuery);        // Execute query
+            statement = conn.createStatement();    // Create sql statement
+            rs = statement.executeQuery(sqlQuery); // Execute query
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         }
@@ -330,7 +373,13 @@ public class BookingDBManager {
         return rs;
     }
 
-    // TODO: Comment
+    /**
+     * Validates the given ID.
+     * Currently, it only checks the length of the ID.
+     *
+     * @param id The ID to validate
+     * @return boolean True if the ID is valid, otherwise false
+     */
     private static boolean isIDValid(int id) {
         int idDigits = String.valueOf(id).length();
         return (idDigits > 0 && idDigits <= 4);
