@@ -7,16 +7,23 @@ public class FlightDataController {
     private static final String controllerName = "Flight data Controller";
     private static boolean _isInitialised = false;
 
-    // TODO: Comment
+    /**
+     * Checks if the controller is initialised and ready for use.
+     *
+     * @return boolean True if the controller is initialized, otherwise false
+     */
     private static boolean isControllerReady() {
         if (_isInitialised)
             return true;
 
+        // Not initialised
         System.err.printf("%s: Not initialised!\n", controllerName);
         return false;
     }
 
-    // TODO: Comment
+    /**
+     * Initializes the controller by loading flight data from a JSON file.
+     */
     public static void init() {
         FlightManager.load(); // Load in flight data
 
@@ -24,7 +31,11 @@ public class FlightDataController {
         System.out.printf("%s: Initialised!\n", controllerName);
     }
 
-    // TODO: Comment
+    /**
+     * Retrieves a set of flights.
+     *
+     * @return HashSet<Flight> A set of flight objects
+     */
     public static HashSet<Flight> getFlights() {
         if (!isControllerReady())
             return null;
@@ -32,7 +43,12 @@ public class FlightDataController {
         return FlightManager.getFlights();
     }
 
-    // TODO: Comment
+    /**
+     * Retrieves a flight by its flight number.
+     *
+     * @param flightNumber The flight number to search for
+     * @return Flight The flight object if found, or null if not found
+     */
     public static Flight getFlightByNumber(String flightNumber) {
         if (!isControllerReady())
             return null;
@@ -40,7 +56,12 @@ public class FlightDataController {
         return FlightManager.getFlightByNumber(flightNumber);
     }
 
-    // TODO: Comment
+    /**
+     * Retrieves a map of seats for the specified flight.
+     *
+     * @param flight The flight for which to retrieve the seat map
+     * @return HashMap<String, Seat> A map of seat identifiers to their corresponding Seat objects
+     */
     public static HashMap<String, Seat> getSeatMap(Flight flight) {
         if (!isControllerReady())
             return null;
