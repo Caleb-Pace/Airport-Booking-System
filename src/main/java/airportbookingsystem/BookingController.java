@@ -70,15 +70,15 @@ public class BookingController {
     }
 
     /**
-     * Retrieves a list of booking IDs from the database.
+     * Retrieves a list of bookings from the database.
      *
-     * @return ArrayList<Integer> List of booking IDs
+     * @return ArrayList<Booking> List of booking IDs
      */
-    public static ArrayList<Integer> getBookingIDs() {
+    public static ArrayList<Booking> getBookings() {
         if (!isControllerReady())
         return null;
         
-        return BookingDBManager.getAllIDs();
+        return BookingDBManager.getAllBookings();
     }
     
     /**

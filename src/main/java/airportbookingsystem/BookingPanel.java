@@ -266,7 +266,7 @@ public class BookingPanel extends JPanel {
                 if (seat.isTaken) {
                     JOptionPane.showMessageDialog(bookingFrame, "Seat " + selectedSeat + " is already taken. Please select another seat.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    String passengerName = nameField.getText().trim();
+                    String passengerName = nameField.getText().trim().substring(0, 20); // Limit chars to 20
     
                     if (passengerName.isEmpty()) {
                         JOptionPane.showMessageDialog(bookingFrame, "Please enter a name for the ticket.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -299,9 +299,8 @@ public class BookingPanel extends JPanel {
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
     
         // Retrieve all booking IDs
-        ArrayList<Integer> ids = BookingController.getBookingIDs();
-        for (int id : ids) {
-            Booking booking = BookingController.getBooking(id); // Retrieve booking by ID
+        ArrayList<Booking> bookings = BookingController.getBookings();
+        for (Booking booking : bookings) {
             if (booking != null) {
                 // Add a row for each booking
                 tableModel.addRow(new Object[]{
