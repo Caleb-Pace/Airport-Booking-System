@@ -287,7 +287,7 @@ public class BookingDBManager {
                                       + "seat_number VARCHAR(4))";
                 statement.execute(createTableSQL);
 
-                System.out.println("Table 'bookings' created successfully!");
+                System.out.println("  Database: Table 'bookings' created successfully!");
             } catch (SQLException ex) {
                 // Rethrow exception if it’s not a "table already exists" error.
                 if (!ex.getMessage().contains("already exists in Schema"))
@@ -301,7 +301,7 @@ public class BookingDBManager {
                                       + "passenger_name VARCHAR(20))";
                 statement.execute(createTableSQL);
                 
-                System.out.println("Table 'people' created successfully!");
+                System.out.println("  Database: Table 'people' created successfully!");
             } catch (SQLException ex) {
                 // Rethrow exception if it’s not a "table already exists" error.
                 if (!ex.getMessage().contains("already exists in Schema"))
